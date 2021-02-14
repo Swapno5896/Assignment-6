@@ -31,7 +31,6 @@ const showImages = (images) => {
   imagesArea.style.display = 'block';
   gallery.innerHTML = '';
   // show gallery title
-  console.log(images);
   galleryHeader.style.display = 'flex';
   images.forEach(image => {
     console.log(image.webformatURL);
@@ -54,13 +53,16 @@ const getImages = (query) => {
 let slideIndex = 0;
 const selectItem = (event, img) => {
   let element = event.target;
+  // element.classList.add('added');
   element.classList.add('added');
- 
   let item = sliders.indexOf(img);
   if (item === -1) {
+    console.log(item);
+    // sliders.push(img);
     sliders.push(img);
+
   } else {
-    alert('Hey, Already added !')
+    element.classList.toggle('added');
   }
 }
 var timer
