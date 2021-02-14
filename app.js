@@ -63,6 +63,7 @@ const selectItem = (event, img) => {
 
   } else {
     element.classList.toggle('added');
+    
   }
 }
 var timer
@@ -86,6 +87,15 @@ const createSlider = () => {
   // hide image aria
   imagesArea.style.display = 'none';
   const duration = document.getElementById('duration').value || 1000;
+
+if(duration>0){
+  timer = setInterval(function () {
+    slideIndex++;
+    changeSlide(slideIndex);
+  }, duration);
+
+
+  
   sliders.forEach(slide => {
     let item = document.createElement('div')
     item.className = "slider-item";
@@ -94,11 +104,22 @@ const createSlider = () => {
     alt="">`;
     sliderContainer.appendChild(item)
   })
+}
+else{
+  alert('please give positive no')
+}
+
+
+
+
+
+
+
+
+
+
   changeSlide(0)
-  timer = setInterval(function () {
-    slideIndex++;
-    changeSlide(slideIndex);
-  }, duration);
+
 }
 
 // change slider index 
