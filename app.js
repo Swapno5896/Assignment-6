@@ -28,21 +28,26 @@ const KEY = '15674931-a9d714b6e9d654524df198e00&q';
 
 // show images 
 const showImages = (images) => {
-  imagesArea.style.display = 'block';
-  gallery.innerHTML = '';
-  // show gallery title
-  galleryHeader.style.display = 'flex';
-  images.forEach(image => {
-    console.log(image.webformatURL);
-    let div = document.createElement('div');
-    div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
-    div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
-    gallery.appendChild(div)
+          imagesArea.style.display = 'block';
+          gallery.innerHTML = '';
+          // show gallery title
+          galleryHeader.style.display = 'flex';
+          images.forEach(image => {
+            console.log(image.webformatURL);
+            let div = document.createElement('div');
+            div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
+            div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
+            
+            gallery.appendChild(div)
+           
   })
+  spinner()
 
 }
 
 const getImages = (query) => {
+  spinner()
+
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
     .then(data => showImages(data.hits))
@@ -56,6 +61,7 @@ const selectItem = (event, img) => {
   // element.classList.add('added');
   element.classList.add('added');
   let item = sliders.indexOf(img);
+  spinner()
   if (item === -1) {
     console.log(item);
     // sliders.push(img);
@@ -73,6 +79,7 @@ const createSlider = () => {
     alert('Select at least 2 image.')
     return;
   }
+  
   // crate slider previous next area
   sliderContainer.innerHTML = '';
   const prevNext = document.createElement('div');
@@ -80,8 +87,12 @@ const createSlider = () => {
   prevNext.innerHTML = ` 
   <span class="prev" onclick="changeItem(-1)"><i class="fas fa-chevron-left"></i></span>
   <span class="next" onclick="changeItem(1)"><i class="fas fa-chevron-right"></i></span>
+  
+ 
   `;
 
+  
+ 
   sliderContainer.appendChild(prevNext)
   document.querySelector('.main').style.display = 'block';
   // hide image aria
@@ -97,6 +108,7 @@ if(duration>0){
 
   
   sliders.forEach(slide => {
+    // spinner()
     let item = document.createElement('div')
     item.className = "slider-item";
     item.innerHTML = `<img class="w-100"
@@ -159,3 +171,15 @@ searchBtn.addEventListener('click', function () {
 sliderBtn.addEventListener('click', function () {
   createSlider()
 })
+
+const spinner=()=>{
+  const spinner = document.getElementById('spinner')
+  spinner.classList.toggle('d-none')
+}
+
+
+
+
+
+//aditional
+
