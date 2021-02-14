@@ -9,24 +9,13 @@ const search = document.getElementById('search')
 let sliders = [];
  
 
-// search by enter 
-search.addEventListener("keyup",(event)=> {
-  // Number 13 is the "Enter" key on the keyboard
-  if (event.key == 'Enter'){
 
-    // Cancel the default action, if needed
-    // event.preventDefault();
-    // Trigger the button element with a click
+search.addEventListener("keyup",(event)=> {
+  if (event.key == 'Enter'){
     searchBtn.click()
   }
 });
-
-// If this key doesn't work
-// Find the name in the url and go to their website
-// to create your own api key
 const KEY = '15674931-a9d714b6e9d654524df198e00&q';
-
-// show images 
 const showImages = (images) => {
           imagesArea.style.display = 'block';
           gallery.innerHTML = '';
@@ -36,7 +25,7 @@ const showImages = (images) => {
             console.log(image.webformatURL);
             let div = document.createElement('div');
             div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
-            div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
+            div.innerHTML = ` <img title="This is a mouseover text!" class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
             
             gallery.appendChild(div)
            
@@ -56,7 +45,6 @@ const getImages = (query) => {
 let slideIndex = 0;
 const selectItem = (event, img) => {
   let element = event.target;
-  // element.classList.add('added');
   element.classList.add('added');
   let item = sliders.indexOf(img);
   spinner()
@@ -69,13 +57,11 @@ const selectItem = (event, img) => {
 }
 var timer
 const createSlider = () => {
-  // check slider image length
   if (sliders.length < 2) {
     alert('Select at least 2 image.')
     return;
   }
   
-  // crate slider previous next area
   sliderContainer.innerHTML = '';
   const prevNext = document.createElement('div');
   prevNext.className = "prev-next d-flex w-100 justify-content-between align-items-center";
@@ -90,45 +76,38 @@ const createSlider = () => {
  
   sliderContainer.appendChild(prevNext)
   document.querySelector('.main').style.display = 'block';
-  // hide image aria
   imagesArea.style.display = 'none';
   const duration = document.getElementById('duration').value || 1000;
 
 if(duration>0){
-  timer = setInterval(function () {
+  timer = setInterval(function (){
     slideIndex++;
     changeSlide(slideIndex);
   }, duration);
-
-
-  
   sliders.forEach(slide => {
-    // spinner()
     let item = document.createElement('div')
     item.className = "slider-item";
-    item.innerHTML = `<img class="w-100"
-    src="${slide}"
+    item.innerHTML = `<img  class="w-100" src="${slide}"
     alt="">`;
     sliderContainer.appendChild(item)
+    
+  changeSlide(0)
   })
 }
+
 else{
   alert('please give positive no')
+  
+    }
+
+
 }
 
-
-  changeSlide(0)
-
-}
-
-// change slider index 
 const changeItem = index => {
   changeSlide(slideIndex += index);
 }
 
-// change slide item
 const changeSlide = (index) => {
-
   const items = document.querySelectorAll('.slider-item');
   if (index < 0) {
     slideIndex = items.length - 1
@@ -143,7 +122,6 @@ const changeSlide = (index) => {
   items.forEach(item => {
     item.style.display = "none"
   })
-
   items[index].style.display = "block"
 }
 
@@ -167,6 +145,4 @@ const spinner=()=>{
 
 
 
-
-//aditional
 
