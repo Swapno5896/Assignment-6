@@ -70,3 +70,6 @@ img {
  #hidden{
    display: none;
  }
+ #spinner{
+   margin: 50%;
+ }
