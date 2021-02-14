@@ -53,8 +53,6 @@ const getImages = (query) => {
     .then(data => showImages(data.hits))
     .catch(err => console.log(err))
 }
-
-
 let slideIndex = 0;
 const selectItem = (event, img) => {
   let element = event.target;
@@ -63,13 +61,10 @@ const selectItem = (event, img) => {
   let item = sliders.indexOf(img);
   spinner()
   if (item === -1) {
-    console.log(item);
-    // sliders.push(img);
     sliders.push(img);
-
   } else {
     element.classList.toggle('added');
-    
+    sliders.pop(img)
   }
 }
 var timer
@@ -120,14 +115,6 @@ if(duration>0){
 else{
   alert('please give positive no')
 }
-
-
-
-
-
-
-
-
 
 
   changeSlide(0)
